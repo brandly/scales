@@ -14,7 +14,7 @@ module.exports = (grunt) ->
                 dest: 'src/scripts/js/scales.js'
         concat:
             options:
-                banner: '//\\ <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %>\n'
+                banner: '// <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %>\n\n'
             dist:
                 src: ['src/scripts/js/*.js']
                 dest: 'scripts.js'
@@ -24,4 +24,3 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-concat'
 
     grunt.registerTask 'default', ['coffee', 'concat']
-

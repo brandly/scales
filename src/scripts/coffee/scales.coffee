@@ -1,14 +1,14 @@
-
-
-window.keyboard = keyboard = qwertyHancock
+keyboardSettings =
     id: 'qwerty-hancock'
-    width: 600
+    width: 800
     height: 150
     octaves: 3
-    startNote: 'A3'
+    startNote: 'C3'
     whiteNotesColour: 'white'
-    blackNotesColour: 'black'
-    hoverColour: '#f3e939'
+    blackNotesColour: 'rgb(59, 99, 172)'
+    hoverColour: 'rgb(255, 255, 0)'
+
+window.keyboard = keyboard = qwertyHancock(keyboardSettings)
 
 context = new webkitAudioContext()
 nodes = {}
@@ -32,3 +32,62 @@ keyboard.keyUp (note, frequency) ->
         nodes[note].noteOff0
 
     nodes[note].disconnect()
+
+class Scales
+
+    notesWithSharps: ['A', 'C', 'D', 'F', 'G']
+    steps:
+        major: [2, 2, 1, 2, 2, 2, 1]
+        naturalMinor: [2, 1, 2, 2, 1, 2, 2]
+        harmonicMinor: [2, 1, 2, 2, 1, 3, 1]
+        melodicMinor: [2, 1, 2, 2, 2, 2, 1]
+
+    constructor: (@startNote, @octaves) ->
+        @baseNotes = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+        @buildNotes()
+
+    buildNotes: ->
+        @notes = []
+        starting =
+            note: @startNote[0]
+            octave: parseInt @startNote[1], 10
+
+        @alignBaseNotes starting.note
+
+        for octaveLoop in [0...@octaves]
+            octave = starting.octave + octaveLoop
+            for baseNote in @baseNotes
+                @notes.push baseNote + octave
+                if baseNote in @notesWithSharps
+                    @notes.push baseNote + '#' + octave
+
+    # Put starting note in the first slot
+    alignBaseNotes: (startingNote) ->
+        noteIndex = @baseNotes.indexOf startingNote
+        beforeNote = @baseNotes.splice 0, noteIndex
+        @baseNotes = @baseNotes.concat beforeNote
+
+    # Main entry point
+    get: (type, startingNote) ->
+        index = @notes.indexOf startingNote
+        steps = @steps[type]
+        result = [startingNote]
+        for step in steps
+            index += step
+            result.push @notes[index]
+        result
+
+    # Convenience
+    getMajor: (startingNote) ->
+        @get 'major', startingNote
+
+    getNaturalMinor: (startingNote) ->
+        @get 'naturalMinor', startingNote
+
+    getHarmonicMinor: (startingNote) ->
+        @get 'harmonicMinor', startingNote
+
+    getMelodicMinor: (startingNote) ->
+        @get 'melodicMinor', startingNote
+
+window.scales = new Scales keyboardSettings.startNote, keyboardSettings.octaves
