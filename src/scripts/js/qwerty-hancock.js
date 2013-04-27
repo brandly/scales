@@ -176,7 +176,11 @@
                 186: 'Eu',
                 222: 'Fu',
                 221: 'F#u',
-                220: 'Gu'
+                220: 'Gu',
+                500: 'G#u',
+                501: 'Au',
+                502: 'A#u',
+                503: 'Bu'
             };
         } else if (keyboardLayout == "de") {
             var keyToKey = {
@@ -199,7 +203,11 @@
                 186: 'Eu',
                 222: 'Fu',
                 221: 'F#u',
-                220: 'Gu'
+                220: 'Gu',
+                500: 'G#u',
+                501: 'Au',
+                502: 'A#u',
+                503: 'Bu'
             };
         }
 
@@ -265,12 +273,20 @@
            keyUpCallback = userCallback;
        };
 
+       // No longer Stuart Memo
+
+       var noteToKeyCode = _.invert(keyToKey);
+
        var press = function (note) {
-           keyDownCallback(note, getFrequency(note));
+           keyboardDown({
+               keyCode: noteToKeyCode[note]
+           });
        };
 
        var release = function (note) {
-           keyUpCallback(note, getFrequency(note));
+           keyboardUp({
+               keyCode: noteToKeyCode[note]
+           });
        };
 
        return {

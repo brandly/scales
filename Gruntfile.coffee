@@ -16,7 +16,12 @@ module.exports = (grunt) ->
             options:
                 banner: '// <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %>\n\n'
             dist:
-                src: ['src/scripts/js/*.js']
+                src: [
+                    'src/scripts/js/underscore.js'
+                    'src/scripts/js/raphael-min.js'
+                    'src/scripts/js/qwerty-hancock.js'
+                    'src/scripts/js/scales.js'
+                ]
                 dest: 'scripts.js'
 
     grunt.loadNpmTasks 'grunt-contrib-watch'
