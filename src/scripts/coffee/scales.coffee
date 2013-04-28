@@ -8,7 +8,7 @@ keyboardSettings =
     blackNotesColour: 'rgb(59, 99, 172)'
     hoverColour: 'rgb(255, 255, 0)'
 
-window.keyboard = keyboard = qwertyHancock(keyboardSettings)
+window.keyboard = keyboard = qwertyHancock keyboardSettings
 
 context = new webkitAudioContext()
 nodes = {}
@@ -91,3 +91,27 @@ class Scales
         @get 'melodicMinor', startingNote
 
 window.scales = new Scales keyboardSettings.startNote, keyboardSettings.octaves
+
+activeNote = null
+intitialOctave = null
+playScale = (notes) ->
+    if activeNote?
+        keyboard.release activeNote
+    if notes.length is 0
+        return
+    note = notes.shift()
+
+    unless intitialOctave
+        intitialOctave = if note.length is 3 then note[2] else note[1]
+    currentOctave = if note.length is 3 then note[2] else note[1]
+
+    if currentOctave is intitialOctave
+        note = note.replace currentOctave, 'l'
+    else
+        note = note.replace currentOctave, 'u'
+
+    keyboard.press note
+    activeNote = note
+    setTimeout playScale, 500, notes
+
+playScale scales.getMajor 'C#3'
