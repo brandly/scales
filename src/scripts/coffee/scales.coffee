@@ -94,6 +94,7 @@ window.scales = new Scales keyboardSettings.startNote, keyboardSettings.octaves
 
 activeNote = null
 intitialOctave = null
+activeTimeout = null
 window.playScale = (notes) ->
     if activeNote?
         keyboard.release activeNote
@@ -112,4 +113,24 @@ window.playScale = (notes) ->
 
     keyboard.press note
     activeNote = note
-    setTimeout playScale, 500, notes
+    activeTimeout = setTimeout playScale, 500, notes
+
+getCheckedRadio = (radioGroup) ->
+    for button in radioGroup
+        if button.checked
+            return button
+    return undefined
+
+getSelectedTonic = ->
+    form = document.forms.item()
+    tonic = getCheckedRadio form.elements.tonic
+    tonic.value
+
+playButton = document.getElementById 'play-button'
+
+playButton.onclick = (e) ->
+    if activeTimeout
+        clearTimeout activeTimeout
+
+    tonic = getSelectedTonic() + '3'
+    playScale scales.getMajor tonic
