@@ -21,11 +21,6 @@ header {
     margin-bottom: 60px;
 }
 
-.container {
-    width: 1000px;
-    margin: 0 auto;
-}
-
 h1 {
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
@@ -33,6 +28,12 @@ h1 {
     font-size: $header-height / 2;
     letter-spacing: 2px;
     text-shadow: $wisteria -3px 1px;
+    display: inline;
+}
+
+.container {
+    width: 1000px;
+    margin: 0 auto;
 }
 
 .controls {
@@ -47,8 +48,11 @@ label, input {
 
 label {
     display: inline-block;
-    padding: 12px 20px;
+}
+
+label, input[type="submit"] {
     border-radius: 2px;
+    padding: 12px 20px;
 }
 
 input[type="radio"] {
@@ -66,8 +70,6 @@ input[type="submit"] {
 
     background-color: $wisteria;
     border: 0;
-    border-radius: 2px;
-    padding: 12px 20px;
     margin: 20px 0;
 
     &:hover {
@@ -85,4 +87,9 @@ form div {
 
 #scale-types {
     font-size: 25px;
+}
+
+.twitter-follow-button {
+    float: right;
+    margin: ($header-height / 2 - 10) 0;
 }

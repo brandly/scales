@@ -13,7 +13,10 @@ module.exports = (grunt) ->
             app:
                 options:
                     join: true
-                src: ['src/scripts/coffee/*.coffee']
+                src: [
+                    'src/scripts/coffee/scales.coffee'
+                    'src/scripts/coffee/app.coffee'
+                ]
                 dest: 'src/scripts/js/scales.js'
         concat:
             options:

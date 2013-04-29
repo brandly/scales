@@ -9,17 +9,18 @@ header {
   height: 100px;
   margin-bottom: 60px; }
 
-.container {
-  width: 1000px;
-  margin: 0 auto; }
-
 h1 {
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
   line-height: 100px;
   font-size: 50px;
   letter-spacing: 2px;
-  text-shadow: #8e44ad -3px 1px; }
+  text-shadow: #8e44ad -3px 1px;
+  display: inline; }
+
+.container {
+  width: 1000px;
+  margin: 0 auto; }
 
 .controls {
   font-size: 40px;
@@ -29,9 +30,11 @@ label, input {
   cursor: pointer; }
 
 label {
-  display: inline-block;
-  padding: 12px 20px;
-  border-radius: 2px; }
+  display: inline-block; }
+
+label, input[type="submit"] {
+  border-radius: 2px;
+  padding: 12px 20px; }
 
 input[type="radio"] {
   display: none; }
@@ -45,8 +48,6 @@ input[type="submit"] {
   color: inherit;
   background-color: #8e44ad;
   border: 0;
-  border-radius: 2px;
-  padding: 12px 20px;
   margin: 20px 0; }
   input[type="submit"]:hover {
     background-color: #9b59b6; }
@@ -59,3 +60,7 @@ form div {
 
 #scale-types {
   font-size: 25px; }
+
+.twitter-follow-button {
+  float: right;
+  margin: 40px 0; }
