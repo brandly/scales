@@ -1,0 +1,66 @@
+body {
+  font-family: "Sansita One", sans-serif;
+  color: white;
+  margin: 0;
+  background-color: #34495e; }
+
+header {
+  background-color: #9b59b6;
+  height: 100px;
+  margin-bottom: 60px; }
+
+h1 {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  line-height: 100px;
+  font-size: 50px;
+  letter-spacing: 2px;
+  text-shadow: #8e44ad -3px 1px;
+  display: inline; }
+
+.container {
+  width: 1000px;
+  margin: 0 auto; }
+
+.controls {
+  font-size: 40px;
+  text-align: center; }
+
+label, input {
+  cursor: pointer; }
+
+label {
+  display: inline-block; }
+
+label, input[type="submit"] {
+  border-radius: 2px;
+  padding: 12px 20px; }
+
+input[type="radio"] {
+  display: none; }
+
+input[type="radio"]:checked + label {
+  background-color: #8e44ad; }
+
+input[type="submit"] {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: #8e44ad;
+  border: 0;
+  margin: 20px 0; }
+  input[type="submit"]:hover {
+    background-color: #9b59b6; }
+
+form div {
+  margin: 20px 0; }
+
+#qwerty-hancock {
+  margin: 20px 0; }
+
+#scale-types {
+  font-size: 25px; }
+
+.twitter-follow-button {
+  float: right;
+  margin: 40px 0; }
