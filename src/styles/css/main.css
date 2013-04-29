@@ -28,7 +28,7 @@ h1 {
 label, input {
   cursor: pointer; }
 
-.tonics label {
+label {
   display: inline-block;
   padding: 12px 20px;
   border-radius: 2px; }
@@ -47,9 +47,15 @@ input[type="submit"] {
   border: 0;
   border-radius: 2px;
   padding: 12px 20px;
-  margin: 30px 0; }
+  margin: 20px 0; }
   input[type="submit"]:hover {
     background-color: #9b59b6; }
 
+form div {
+  margin: 20px 0; }
+
 #qwerty-hancock {
-  margin: 50px 0; }
+  margin: 20px 0; }
+
+#scale-types {
+  font-size: 25px; }

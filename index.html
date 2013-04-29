@@ -32,9 +32,9 @@
   </header>
   <div class="container">
     <div id="qwerty-hancock"></div>
-    <div class="controls">
+    <form class="controls">
 
-      <form class="tonics">
+      <div class="tonics">
 
         <input id="tonic-a" type="radio" name="tonic" value="A">
         <label for="tonic-a">A</label>
@@ -71,11 +71,25 @@
 
         <input id="tonic-g#" type="radio" name="tonic" value="G#">
         <label for="tonic-g#">G#</label>
-      </form>
+      </div>
+
+      <div id="scale-types">
+        <input id="major" type="radio" name="scales" value="major" checked="checked">
+        <label for="major">major</label>
+
+        <input id="natural-minor" type="radio" name="scales" value="naturalMinor">
+        <label for="natural-minor">natural minor</label>
+
+        <input id="harmonic-minor" type="radio" name="scales" value="harmonicMinor">
+        <label for="harmonic-minor">harmonic minor</label>
+
+        <input id="melodic-minor" type="radio" name="scales" value="melodicMinor">
+        <label for="melodic-minor">melodic minor</label>
+      </div>
 
       <input id="play-button" type="submit" value="play">
 
-    </div>
+    </form>
   </div>
 
   <script src="scripts.js"></script>
