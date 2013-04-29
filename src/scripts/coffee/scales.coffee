@@ -1,12 +1,12 @@
 keyboardSettings =
     id: 'qwerty-hancock'
-    width: 800
-    height: 150
+    width: 1000
+    height: 200
     octaves: 3
     startNote: 'C3'
     whiteNotesColour: 'white'
-    blackNotesColour: 'rgb(59, 99, 172)'
-    hoverColour: 'rgb(255, 255, 0)'
+    blackNotesColour: '#2c3e50'
+    hoverColour: '#9b59b6'
 
 window.keyboard = keyboard = qwertyHancock keyboardSettings
 
@@ -94,7 +94,7 @@ window.scales = new Scales keyboardSettings.startNote, keyboardSettings.octaves
 
 activeNote = null
 intitialOctave = null
-playScale = (notes) ->
+window.playScale = (notes) ->
     if activeNote?
         keyboard.release activeNote
     if notes.length is 0
@@ -113,5 +113,3 @@ playScale = (notes) ->
     keyboard.press note
     activeNote = note
     setTimeout playScale, 500, notes
-
-playScale scales.getMajor 'C#3'

@@ -6,6 +6,9 @@ module.exports = (grunt) ->
             coffee:
                 files: ['src/scripts/coffee/*.coffee']
                 tasks: ['coffee', 'concat']
+            sass:
+                files: ['src/styles/scss/*.scss']
+                tasks: ['sass']
         coffee:
             app:
                 options:
@@ -23,9 +26,14 @@ module.exports = (grunt) ->
                     'src/scripts/js/scales.js'
                 ]
                 dest: 'scripts.js'
+        sass:
+            app:
+                files:
+                    'src/styles/css/main.css': 'src/styles/scss/main.scss'
 
     grunt.loadNpmTasks 'grunt-contrib-watch'
     grunt.loadNpmTasks 'grunt-contrib-coffee'
     grunt.loadNpmTasks 'grunt-contrib-concat'
+    grunt.loadNpmTasks 'grunt-contrib-sass'
 
     grunt.registerTask 'default', ['coffee', 'concat']

@@ -1,0 +1,55 @@
+body {
+  font-family: "Sansita One", sans-serif;
+  color: white;
+  margin: 0;
+  background-color: #34495e; }
+
+header {
+  background-color: #9b59b6;
+  height: 100px;
+  margin-bottom: 60px; }
+
+.container {
+  width: 1000px;
+  margin: 0 auto; }
+
+h1 {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  line-height: 100px;
+  font-size: 50px;
+  letter-spacing: 2px;
+  text-shadow: #8e44ad -3px 1px; }
+
+.controls {
+  font-size: 40px;
+  text-align: center; }
+
+label, input {
+  cursor: pointer; }
+
+.tonics label {
+  display: inline-block;
+  padding: 12px 20px;
+  border-radius: 2px; }
+
+input[type="radio"] {
+  display: none; }
+
+input[type="radio"]:checked + label {
+  background-color: #8e44ad; }
+
+input[type="submit"] {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  background-color: #8e44ad;
+  border: 0;
+  border-radius: 2px;
+  padding: 12px 20px;
+  margin: 30px 0; }
+  input[type="submit"]:hover {
+    background-color: #9b59b6; }
+
+#qwerty-hancock {
+  margin: 50px 0; }
