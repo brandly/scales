@@ -21,7 +21,9 @@ h1 {
   display: inline; }
 
 h3 {
-  font-size: 22px; }
+  font-size: 22px;
+  border: 2px dashed #9b59b6;
+  padding: 30px 0; }
 
 a {
   color: white; }
@@ -65,7 +67,7 @@ form div {
   margin: 20px 0; }
 
 #qwerty-hancock {
-  margin: 20px 0; }
+  margin: 60px 0 20px 0; }
 
 #scale-types {
   font-size: 25px; }

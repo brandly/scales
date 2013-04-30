@@ -35,7 +35,9 @@ h1 {
 }
 
 h3 {
-    font-size: 22px;
+    font-size: 20px;
+    border: 2px dashed $amethyst;
+    padding: 30px 0;
 }
 
 a {
@@ -95,7 +97,7 @@ form div {
 }
 
 #qwerty-hancock {
-    margin: 20px 0;
+    margin: 60px 0 20px 0;
 }
 
 #scale-types {
