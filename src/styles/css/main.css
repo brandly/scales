@@ -7,24 +7,35 @@ body {
 header {
   background-color: #9b59b6;
   height: 100px;
-  margin-bottom: 60px; }
+  margin-bottom: 40px; }
+
+h1, h2 {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0; }
 
 h1 {
-  -webkit-margin-before: 0;
-  -webkit-margin-after: 0;
   line-height: 100px;
   font-size: 50px;
   letter-spacing: 2px;
   text-shadow: #8e44ad -3px 1px;
   display: inline; }
 
+h3 {
+  font-size: 20px;
+  border: 2px dashed #9b59b6;
+  padding: 30px 0; }
+
+a {
+  color: white; }
+  a:hover {
+    color: #9b59b6; }
+
 .container {
   width: 1000px;
   margin: 0 auto; }
 
 .controls {
-  font-size: 40px;
-  text-align: center; }
+  font-size: 40px; }
 
 label, input {
   cursor: pointer; }
@@ -56,11 +67,17 @@ form div {
   margin: 20px 0; }
 
 #qwerty-hancock {
-  margin: 20px 0; }
+  margin: 40px 0 20px 0; }
 
 #scale-types {
   font-size: 25px; }
 
+.centered {
+  text-align: center; }
+
 .twitter-follow-button {
   float: right;
+  margin: 40px 0; }
+
+.octocat {
   margin: 40px 0; }

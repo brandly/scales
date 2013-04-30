@@ -1542,7 +1542,7 @@
 })(window);
 
 (function() {
-  var Scales, activeNote, activeTimeout, context, getSelected, intitialOctave, keyboard, keyboardSettings, nodes, playButton, playScale, scales,
+  var Scales, activeNote, activeTimeout, context, getSelected, intitialOctave, keyboard, keyboardSettings, message, nodes, playButton, playScale, qwerty, scales,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Scales = (function() {
@@ -1635,6 +1635,12 @@
     return Scales;
 
   })();
+
+  if (typeof webkitAudioContext === 'undefined') {
+    message = '<h3>Sorry, your browser doesn\'t support the Web Audio API. ' + 'Try <a href="http://google.com/chrome">Chrome</a> instead!</h3>';
+    qwerty = document.getElementById('qwerty-hancock');
+    qwerty.insertAdjacentHTML('beforebegin', message);
+  }
 
   keyboardSettings = {
     id: 'qwerty-hancock',
