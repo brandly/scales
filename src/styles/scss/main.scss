@@ -21,14 +21,28 @@ header {
     margin-bottom: 60px;
 }
 
-h1 {
+h1, h2 {
     -webkit-margin-before: 0;
     -webkit-margin-after: 0;
+}
+
+h1 {
     line-height: $header-height;
     font-size: $header-height / 2;
     letter-spacing: 2px;
     text-shadow: $wisteria -3px 1px;
     display: inline;
+}
+
+h3 {
+    font-size: 22px;
+}
+
+a {
+    color: white;
+    &:hover {
+        color: $amethyst;
+    }
 }
 
 .container {
@@ -38,7 +52,6 @@ h1 {
 
 .controls {
     font-size: 40px;
-    text-align: center;
 }
 
 
@@ -87,6 +100,10 @@ form div {
 
 #scale-types {
     font-size: 25px;
+}
+
+.centered {
+    text-align: center;
 }
 
 .twitter-follow-button {

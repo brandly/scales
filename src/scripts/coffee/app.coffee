@@ -1,4 +1,10 @@
 
+if typeof webkitAudioContext is 'undefined'
+    message = '<h3>Sorry, your browser doesn\'t support the Web Audio API. ' +
+              'Try <a href="http://google.com/chrome">Chrome</a> instead!</h3>'
+    qwerty = document.getElementById 'qwerty-hancock'
+    qwerty.insertAdjacentHTML 'beforebegin', message
+
 # Create keyboard
 keyboardSettings =
     id: 'qwerty-hancock'
