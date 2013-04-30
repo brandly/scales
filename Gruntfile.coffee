@@ -39,4 +39,4 @@ module.exports = (grunt) ->
     grunt.loadNpmTasks 'grunt-contrib-concat'
     grunt.loadNpmTasks 'grunt-contrib-sass'
 
-    grunt.registerTask 'default', ['coffee', 'concat']
+    grunt.registerTask 'default', ['coffee', 'concat', 'sass']
