@@ -1,4 +1,4 @@
-// scales 2013-04-29
+// scales 2014-03-08
 
 // Underscore.js 1.4.4
 // ===================
@@ -1542,7 +1542,7 @@
 })(window);
 
 (function() {
-  var Scales, activeNote, activeTimeout, context, getSelected, intitialOctave, keyboard, keyboardSettings, message, nodes, playButton, playScale, qwerty, scales,
+  var Scales, activeNote, activeTimeout, attack, context, filterTypes, getSelected, intitialOctave, keyboard, keyboardSettings, message, nodes, oscillatorTypes, playButton, playNote, playScale, qwerty, scales, sustain, volume,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Scales = (function() {
@@ -1636,7 +1636,9 @@
 
   })();
 
-  if (typeof webkitAudioContext === 'undefined') {
+  window.audioContext = window.audioContext || window.webkitAudioContext;
+
+  if (!window.audioContext) {
     message = '<h3>Sorry, your browser doesn\'t support the Web Audio API. ' + 'Try <a href="http://google.com/chrome">Chrome</a> instead!</h3>';
     qwerty = document.getElementById('qwerty-hancock');
     qwerty.insertAdjacentHTML('beforebegin', message);
@@ -1655,32 +1657,67 @@
 
   keyboard = qwertyHancock(keyboardSettings);
 
-  context = new webkitAudioContext();
+  context = new window.audioContext();
 
   nodes = {};
 
-  keyboard.keyDown(function(note, frequency) {
-    var gainNode, oscillator;
+  oscillatorTypes = {
+    sine: 0,
+    square: 1,
+    sawtooth: 2,
+    triangle: 3
+  };
+
+  filterTypes = {
+    lowpass: 0,
+    highpass: 1,
+    bandpass: 2,
+    lowshelf: 3,
+    highshelf: 4,
+    peaking: 5,
+    notch: 6,
+    allpass: 7
+  };
+
+  volume = 0.4;
+
+  attack = 0.1;
+
+  sustain = 0.8;
+
+  playNote = function(context, frequency) {
+    var filter, gainNode, now, oscillator;
 
     oscillator = context.createOscillator();
     gainNode = context.createGainNode();
-    oscillator.type = 1;
+    oscillator.type = oscillatorTypes.triangle;
     oscillator.frequency.value = frequency;
-    gainNode.gain.value = 0.3;
-    oscillator.connect(gainNode);
-    if (typeof oscillator.noteOn !== 'undefined') {
+    if (typeof oscillator.noteOn === "function") {
       oscillator.noteOn(0);
     }
+    now = context.currentTime;
+    gainNode.gain.cancelScheduledValues(now);
+    gainNode.gain.value = 0;
+    gainNode.gain.setTargetAtTime(0, now, .001);
+    gainNode.gain.linearRampToValueAtTime(volume, now + attack);
+    gainNode.gain.linearRampToValueAtTime(0, now + sustain);
+    filter = context.createBiquadFilter();
+    filter.type = filterTypes.lowpass;
+    filter.frequency.value = 900;
+    oscillator.connect(filter);
+    filter.connect(gainNode);
     gainNode.connect(context.destination);
-    return nodes[note] = oscillator;
+    return oscillator;
+  };
+
+  keyboard.keyDown(function(note, frequency) {
+    var node;
+
+    node = playNote(context, frequency);
+    return nodes[note] = node;
   });
 
-  keyboard.keyUp(function(note, frequency) {
-    if (typeof nodes[note].noteOff !== 'undefined') {
-      nodes[note].noteOff0;
-    }
-    return nodes[note].disconnect();
-  });
+  keyboard.keyUp(function() {});
 
   scales = new Scales(keyboardSettings.startNote, keyboardSettings.octaves);
 
