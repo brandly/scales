@@ -23,25 +23,49 @@ keyboard = qwertyHancock keyboardSettings
 context = new window.audioContext()
 nodes = {}
 
-volume = 0.3 # out of 1
+# http://docs.webplatform.org/wiki/apis/webaudio/OscillatorNode/type
+oscillatorTypes =
+    sine: 0
+    square: 1
+    sawtooth: 2
+    triangle: 3
+
+# http://docs.webplatform.org/wiki/apis/webaudio/BiquadFilterNode/type
+filterTypes =
+    lowpass: 0
+    highpass: 1
+    bandpass: 2
+    lowshelf: 3
+    highshelf: 4
+    peaking: 5
+    notch: 6
+    allpass: 7
+
+volume = 0.4 # out of 1
 attack = 0.1 # in seconds
 sustain = 0.8 # also seconds
 playNote = (context, frequency) ->
     oscillator = context.createOscillator()
     gainNode = context.createGainNode()
 
-    oscillator.type = 3
+    oscillator.type = oscillatorTypes.triangle
     oscillator.frequency.value = frequency
+    oscillator.noteOn? 0
 
     now = context.currentTime
     gainNode.gain.cancelScheduledValues now
 
     gainNode.gain.value = 0
+    gainNode.gain.setTargetAtTime 0, now, .001 # prevents popping
     gainNode.gain.linearRampToValueAtTime volume, now + attack
     gainNode.gain.linearRampToValueAtTime 0, now + sustain
 
-    oscillator.connect gainNode
-    oscillator.noteOn? 0
+    filter = context.createBiquadFilter()
+    filter.type = filterTypes.lowpass
+    filter.frequency.value = 900
+
+    oscillator.connect filter
+    filter.connect gainNode
 
     gainNode.connect context.destination
     return oscillator
