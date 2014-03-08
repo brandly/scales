@@ -1,5 +1,7 @@
 
-if typeof webkitAudioContext is 'undefined'
+window.audioContext = window.audioContext or window.webkitAudioContext
+
+unless window.audioContext
     message = '<h3>Sorry, your browser doesn\'t support the Web Audio API. ' +
               'Try <a href="http://google.com/chrome">Chrome</a> instead!</h3>'
     qwerty = document.getElementById 'qwerty-hancock'
@@ -18,29 +20,39 @@ keyboardSettings =
 
 keyboard = qwertyHancock keyboardSettings
 
-context = new webkitAudioContext()
+context = new window.audioContext()
 nodes = {}
 
-# Bind keys
-keyboard.keyDown (note, frequency) ->
+volume = 0.3 # out of 1
+attack = 0.1 # in seconds
+sustain = 0.8 # also seconds
+playNote = (context, frequency) ->
     oscillator = context.createOscillator()
     gainNode = context.createGainNode()
 
-    oscillator.type = 1
+    oscillator.type = 3
     oscillator.frequency.value = frequency
-    gainNode.gain.value = 0.3
+
+    now = context.currentTime
+    gainNode.gain.cancelScheduledValues now
+
+    gainNode.gain.value = 0
+    gainNode.gain.linearRampToValueAtTime volume, now + attack
+    gainNode.gain.linearRampToValueAtTime 0, now + sustain
+
     oscillator.connect gainNode
-    if typeof oscillator.noteOn isnt 'undefined'
-        oscillator.noteOn 0
+    oscillator.noteOn? 0
 
     gainNode.connect context.destination
-    nodes[note] = oscillator
+    return oscillator
 
-keyboard.keyUp (note, frequency) ->
-    if typeof nodes[note].noteOff isnt 'undefined'
-        nodes[note].noteOff0
+# Bind keys
+keyboard.keyDown (note, frequency) ->
+    node = playNote context, frequency
+    nodes[note] = node
 
-    nodes[note].disconnect()
+# throws if not defined
+keyboard.keyUp ->
 
 # Create scales
 scales = new Scales keyboardSettings.startNote, keyboardSettings.octaves
