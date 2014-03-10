@@ -14,11 +14,11 @@ keyboardSettings =
     height: 200
     octaves: 3
     startNote: 'C3'
-    whiteNotesColour: 'white'
-    blackNotesColour: '#2c3e50'
+    whiteKeyColour: 'white'
+    blackKeyColour: '#2c3e50'
     hoverColour: '#9b59b6'
 
-keyboard = qwertyHancock keyboardSettings
+keyboard = new QwertyHancock keyboardSettings
 
 context = new window.audioContext()
 nodes = {}
@@ -71,12 +71,9 @@ playNote = (context, frequency) ->
     return oscillator
 
 # Bind keys
-keyboard.keyDown (note, frequency) ->
+keyboard.keyDown = (note, frequency) ->
     node = playNote context, frequency
     nodes[note] = node
-
-# throws if not defined
-keyboard.keyUp ->
 
 # Create scales
 scales = new Scales keyboardSettings.startNote, keyboardSettings.octaves
