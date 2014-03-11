@@ -1,4 +1,4 @@
-// scales 2014-03-09
+// scales 2014-03-10
 
 // Underscore.js 1.4.4
 // ===================
@@ -1719,7 +1719,7 @@
 
   keyboardSettings = {
     id: 'qwerty-hancock',
-    width: 1000,
+    width: 987,
     height: 200,
     octaves: 3,
     startNote: 'C3',
