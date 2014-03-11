@@ -10,7 +10,7 @@ unless window.audioContext
 # Create keyboard
 keyboardSettings =
     id: 'qwerty-hancock'
-    width: 1000
+    width: 987
     height: 200
     octaves: 3
     startNote: 'C3'
