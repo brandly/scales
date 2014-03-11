@@ -357,11 +357,11 @@
             }
         };
 
-       window.onkeydown = keyboardDown;
-       window.onkeyup = keyboardUp;
+        window.onkeydown = keyboardDown;
+        window.onkeyup = keyboardUp;
 
-       // allow programmatic key presses
-       // not Stuart Memo
+        // allow programmatic key presses
+        // not Stuart Memo
 
         // _.invert but i don't need the whole lib
         // underscorejs.org
