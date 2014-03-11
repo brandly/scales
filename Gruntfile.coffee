@@ -23,7 +23,6 @@ module.exports = (grunt) ->
                 banner: '// <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %>\n\n'
             dist:
                 src: [
-                    'src/scripts/js/underscore.js'
                     'src/scripts/js/raphael-min.js'
                     'src/scripts/js/qwerty-hancock.js'
                     'src/scripts/js/scales.js'
