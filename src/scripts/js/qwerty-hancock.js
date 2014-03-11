@@ -363,7 +363,18 @@
        // allow programmatic key presses
        // not Stuart Memo
 
-       var noteToKeyCode = _.invert(keyToKey);
+        // _.invert but i don't need the whole lib
+        // underscorejs.org
+        function invert (obj) {
+            var result = {};
+            var keys = Object.keys(obj);
+            for (var i = 0, length = keys.length; i < length; i++) {
+                result[obj[keys[i]]] = keys[i];
+            }
+            return result;
+        }
+
+       var noteToKeyCode = invert(keyToKey);
 
        qh.press = function (note) {
            keyboardDown({
