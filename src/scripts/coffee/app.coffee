@@ -1,7 +1,7 @@
 
-window.audioContext = window.audioContext or window.webkitAudioContext
+AudioContext = window.AudioContext or window.webkitAudioContext
 
-unless window.audioContext
+unless AudioContext
     message = '<h3>Sorry, your browser doesn\'t support the Web Audio API. ' +
               'Try <a href="http://google.com/chrome">Chrome</a> instead!</h3>'
     qwerty = document.getElementById 'qwerty-hancock'
@@ -20,7 +20,7 @@ keyboardSettings =
 
 keyboard = new QwertyHancock keyboardSettings
 
-context = new window.audioContext()
+context = new AudioContext
 nodes = {}
 
 # http://docs.webplatform.org/wiki/apis/webaudio/OscillatorNode/type
@@ -46,7 +46,7 @@ attack = 0.1 # in seconds
 sustain = 0.8 # also seconds
 playNote = (context, frequency) ->
     oscillator = context.createOscillator()
-    gainNode = context.createGainNode()
+    gainNode = context.createGain()
 
     oscillator.type = oscillatorTypes.triangle
     oscillator.frequency.value = frequency
