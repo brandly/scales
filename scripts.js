@@ -1,4 +1,4 @@
-// scales 2014-03-11
+// scales 2014-09-12
 
 /*
  * Qwerty Hancock keyboard library v0.3
@@ -359,11 +359,11 @@
             }
         };
 
-       window.onkeydown = keyboardDown;
-       window.onkeyup = keyboardUp;
+        window.onkeydown = keyboardDown;
+        window.onkeyup = keyboardUp;
 
-       // allow programmatic key presses
-       // not Stuart Memo
+        // allow programmatic key presses
+        // not Stuart Memo
 
         // _.invert but i don't need the whole lib
         // underscorejs.org
@@ -398,7 +398,7 @@
 })(window);
 
 (function() {
-  var Scales, activeNote, activeTimeout, attack, context, filterTypes, getSelected, intitialOctave, keyboard, keyboardSettings, message, nodes, oscillatorTypes, playButton, playNote, playScale, qwerty, scales, sustain, volume,
+  var AudioContext, Scales, activeNote, activeTimeout, attack, context, filterTypes, getSelected, intitialOctave, keyboard, keyboardSettings, message, nodes, oscillatorTypes, playButton, playNote, playScale, qwerty, scales, sustain, volume,
     __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
 
   Scales = (function() {
@@ -420,7 +420,6 @@
 
     Scales.prototype.buildNotes = function() {
       var baseNote, octave, octaveLoop, starting, _i, _ref, _results;
-
       this.notes = [];
       starting = {
         note: this.startNote[0],
@@ -432,7 +431,6 @@
         octave = starting.octave + octaveLoop;
         _results.push((function() {
           var _j, _len, _ref1, _results1;
-
           _ref1 = this.baseNotes;
           _results1 = [];
           for (_j = 0, _len = _ref1.length; _j < _len; _j++) {
@@ -452,7 +450,6 @@
 
     Scales.prototype.alignBaseNotes = function(startingNote) {
       var beforeNote, noteIndex;
-
       noteIndex = this.baseNotes.indexOf(startingNote);
       beforeNote = this.baseNotes.splice(0, noteIndex);
       return this.baseNotes = this.baseNotes.concat(beforeNote);
@@ -460,7 +457,6 @@
 
     Scales.prototype.get = function(type, startingNote) {
       var index, result, step, steps, _i, _len;
-
       index = this.notes.indexOf(startingNote);
       steps = this.steps[type];
       result = [startingNote];
@@ -492,9 +488,9 @@
 
   })();
 
-  window.audioContext = window.audioContext || window.webkitAudioContext;
+  AudioContext = window.AudioContext || window.webkitAudioContext;
 
-  if (!window.audioContext) {
+  if (!AudioContext) {
     message = '<h3>Sorry, your browser doesn\'t support the Web Audio API. ' + 'Try <a href="http://google.com/chrome">Chrome</a> instead!</h3>';
     qwerty = document.getElementById('qwerty-hancock');
     qwerty.insertAdjacentHTML('beforebegin', message);
@@ -513,7 +509,7 @@
 
   keyboard = new QwertyHancock(keyboardSettings);
 
-  context = new window.audioContext();
+  context = new AudioContext;
 
   nodes = {};
 
@@ -543,9 +539,8 @@
 
   playNote = function(context, frequency) {
     var filter, gainNode, now, oscillator;
-
     oscillator = context.createOscillator();
-    gainNode = context.createGainNode();
+    gainNode = context.createGain();
     oscillator.type = oscillatorTypes.triangle;
     oscillator.frequency.value = frequency;
     if (typeof oscillator.noteOn === "function") {
@@ -568,7 +563,6 @@
 
   keyboard.keyDown = function(note, frequency) {
     var node;
-
     node = playNote(context, frequency);
     return nodes[note] = node;
   };
@@ -583,7 +577,6 @@
 
   playScale = function(notes) {
     var currentOctave, note;
-
     if (activeNote != null) {
       keyboard.release(activeNote);
     }
@@ -607,7 +600,6 @@
 
   getSelected = function(radioGroupName) {
     var button, form, radioGroup, _i, _len;
-
     form = document.forms.item();
     radioGroup = form.elements[radioGroupName];
     for (_i = 0, _len = radioGroup.length; _i < _len; _i++) {
@@ -623,7 +615,6 @@
 
   playButton.onclick = function(e) {
     var octave, scale, tonic;
-
     e.preventDefault();
     octave = '3';
     if (activeTimeout) {
