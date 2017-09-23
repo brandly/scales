@@ -1,4 +1,4 @@
-// scales 2014-09-12
+// scales 2017-09-23
 
 /*
  * Qwerty Hancock keyboard library v0.3
@@ -514,21 +514,21 @@
   nodes = {};
 
   oscillatorTypes = {
-    sine: 0,
-    square: 1,
-    sawtooth: 2,
-    triangle: 3
+    sine: 'sine',
+    square: 'square',
+    sawtooth: 'sawtooth',
+    triangle: 'triangle'
   };
 
   filterTypes = {
-    lowpass: 0,
-    highpass: 1,
-    bandpass: 2,
-    lowshelf: 3,
-    highshelf: 4,
-    peaking: 5,
-    notch: 6,
-    allpass: 7
+    lowpass: 'lowpass',
+    highpass: 'highpass',
+    bandpass: 'bandpass',
+    lowshelf: 'lowshelf',
+    highshelf: 'highshelf',
+    peaking: 'peaking',
+    notch: 'notch',
+    allpass: 'allpass'
   };
 
   volume = 0.4;
@@ -564,6 +564,7 @@
   keyboard.keyDown = function(note, frequency) {
     var node;
     node = playNote(context, frequency);
+    node.start();
     return nodes[note] = node;
   };
 
@@ -600,7 +601,7 @@
 
   getSelected = function(radioGroupName) {
     var button, form, radioGroup, _i, _len;
-    form = document.forms.item();
+    form = document.forms.item(0);
     radioGroup = form.elements[radioGroupName];
     for (_i = 0, _len = radioGroup.length; _i < _len; _i++) {
       button = radioGroup[_i];
