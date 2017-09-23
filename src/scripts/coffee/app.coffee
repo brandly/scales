@@ -25,21 +25,21 @@ nodes = {}
 
 # http://docs.webplatform.org/wiki/apis/webaudio/OscillatorNode/type
 oscillatorTypes =
-    sine: 0
-    square: 1
-    sawtooth: 2
-    triangle: 3
+    sine: 'sine'
+    square: 'square'
+    sawtooth: 'sawtooth'
+    triangle: 'triangle'
 
 # http://docs.webplatform.org/wiki/apis/webaudio/BiquadFilterNode/type
 filterTypes =
-    lowpass: 0
-    highpass: 1
-    bandpass: 2
-    lowshelf: 3
-    highshelf: 4
-    peaking: 5
-    notch: 6
-    allpass: 7
+    lowpass: 'lowpass'
+    highpass: 'highpass'
+    bandpass: 'bandpass'
+    lowshelf: 'lowshelf'
+    highshelf: 'highshelf'
+    peaking: 'peaking'
+    notch: 'notch'
+    allpass: 'allpass'
 
 volume = 0.4 # out of 1
 attack = 0.1 # in seconds
@@ -73,6 +73,7 @@ playNote = (context, frequency) ->
 # Bind keys
 keyboard.keyDown = (note, frequency) ->
     node = playNote context, frequency
+    node.start()
     nodes[note] = node
 
 # Create scales
@@ -102,7 +103,7 @@ playScale = (notes) ->
     activeTimeout = setTimeout playScale, 500, notes
 
 getSelected = (radioGroupName) ->
-    form = document.forms.item()
+    form = document.forms.item(0)
     radioGroup = form.elements[radioGroupName]
     for button in radioGroup
         if button.checked
